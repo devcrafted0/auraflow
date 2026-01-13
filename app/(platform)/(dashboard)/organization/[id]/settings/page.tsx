@@ -1,7 +1,26 @@
-import React from "react";
+import { OrganizationProfile } from "@clerk/nextjs";
 
-const page = () => {
-  return <div>page</div>;
+const Page = () => {
+  return (
+    <div className="w-full md:w-auto">
+      <OrganizationProfile
+        appearance={{
+          elements: {
+            rootBox: {
+              width: "100%",
+              boxShadow: "none",
+              border: "1px solid #e5e5e5",
+              borderRadius: "11px",
+            },
+            cardBox: {
+              width: "100%",
+              boxShadow: "none",
+            },
+          },
+        }}
+      />
+    </div>
+  );
 };
 
-export default page;
+export default Page;

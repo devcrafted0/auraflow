@@ -68,7 +68,7 @@ const NavItem = ({
         onClick={() => onExpand(organization.id)}
         className={cn(
           "flex items-center gap-x-2 p-1.5 text-neutral-700 rounded-md hover:bg-neutral-500/10 transition text-start no-underline hover:no-underline",
-          isActive && !isExpanded && "bg-sky-500/10 text-sky-700"
+          isActive && !isExpanded && "bg-sky-500/10 text-sky-700",
         )}
       >
         <div className="flex items-center gap-x-2">
@@ -77,6 +77,7 @@ const NavItem = ({
               src={organization.imageUrl}
               alt={organization.name}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="rounded-sm object-cover"
             />
           </div>
@@ -91,7 +92,7 @@ const NavItem = ({
             onClick={() => onClick(route.href)}
             className={cn(
               "w-full font-normal justify-start pl-10 mb-1",
-              pathname === route.href && "bg-sky-500/10 text-sky-700"
+              pathname === route.href && "bg-sky-500/10 text-sky-700",
             )}
             variant="ghost"
           >

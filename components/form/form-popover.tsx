@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode } from "react";
+import { ComponentRef, ReactNode, useRef } from "react";
 import {
   Popover,
   PopoverTrigger,
@@ -14,6 +14,7 @@ import { useAction } from "@/hooks/use-action";
 import { createBoard } from "@/actions/create-board";
 import { toast } from "sonner";
 import FormPicker from "./form-picker";
+import { useRouter } from "next/navigation";
 
 interface FormPopoverProps {
   children: ReactNode;
@@ -28,13 +29,16 @@ const FormPopover = ({
   side = "bottom",
   align = "center",
 }: FormPopoverProps) => {
+  const closeRef = useRef<ComponentRef<"button">>(null);
+  const router = useRouter();
+
   const { execute, fieldErrors } = useAction(createBoard, {
     onSuccess: (data) => {
-      console.log({ data });
       toast.success("Board Created!");
+      closeRef.current?.click();
+      router.push(`/board/${data.id}`);
     },
     onError: (data) => {
-      console.error({ data });
       toast.error(data);
     },
   });
@@ -42,8 +46,11 @@ const FormPopover = ({
   const onSubmit = (formData: FormData) => {
     const title = formData.get("title") as string;
     const image = formData.get("image") as string;
-    console.log({ image });
-    // execute({ title });
+
+    console.log(image);
+
+    execute({ title, image });
+    console.log(image, "After");
   };
   return (
     <Popover>
@@ -57,7 +64,7 @@ const FormPopover = ({
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
           Create Board
         </div>
-        <PopoverClose asChild>
+        <PopoverClose ref={closeRef} asChild>
           <Button
             className="h-auto w-auto p-2 absolute top-2 right-2 text-neutral-600 focus-visible:ring-0"
             variant="ghost"

@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Logo from "@/components/Logo";
 
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+
 const headingFont = localFont({
   src: "../../public/font/font.woff2",
 });
@@ -16,13 +19,19 @@ const textFont = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
-const MarketingPage = () => {
+const MarketingPage = async () => {
+  const { userId } = await auth();
+
+  if (userId) {
+    redirect("/select-org");
+  }
+
   return (
     <div className="flex justify-center items-center flex-col">
       <div
         className={cn(
           "flex justify-center items-center flex-col",
-          headingFont.className
+          headingFont.className,
         )}
       >
         <div className="flex p-4 rounded-full bg-amber-100 text-amber-700 uppercase shadow-sm border mb-4">
@@ -39,7 +48,7 @@ const MarketingPage = () => {
       <div
         className={cn(
           "text-sm md:text-xl text-neutral-400 mt-4 max-w-xs md:max-w-2xl text-center mx-auto",
-          textFont.className
+          textFont.className,
         )}
       >
         Collaborate, manage projects, and reach new productivity peaks. From

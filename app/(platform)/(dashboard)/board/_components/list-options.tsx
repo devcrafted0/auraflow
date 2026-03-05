@@ -63,7 +63,7 @@ const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="px-0 py-3" align="start" side="bottom">
-        <div className="text-sm font-medium text-center text-neutral-600 pb-2">
+        <div className="text-sm font-medium text-center text-neutral-600 py-1">
           List Actions
         </div>
 

@@ -63,7 +63,7 @@ const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="px-0 py-3" align="start" side="bottom">
-        <div className="text-sm font-medium text-center text-neutral-600 pb-4">
+        <div className="text-sm font-medium text-center text-neutral-600 pb-2">
           List Actions
         </div>
 
@@ -77,11 +77,11 @@ const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
         </PopoverClose>
 
         <Button
-          className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
+          className="rounded-none w-full h-auto p-2 px-5 justify-start items-center font-normal text-sm"
           variant="ghost"
           onClick={onAddCard}
         >
-          <CirclePlus className="ml-2.5" />
+          <CirclePlus className="ml-3" />
           Add a Card
         </Button>
         <form action={onCopy}>
@@ -89,9 +89,9 @@ const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
           <input hidden name="boardId" id="boardId" value={data.boardId} />
           <FormSubmit
             variant="ghost"
-            className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
+            className="rounded-none w-full h-auto p-2 px-5 justify-start items-center font-normal text-sm"
           >
-            <Copy className="ml-2.5" />
+            <Copy className="ml-3" />
             Copy Selected List
           </FormSubmit>
         </form>
@@ -101,9 +101,9 @@ const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
           <input hidden name="boardId" id="boardId" value={data.boardId} />
           <FormSubmit
             variant="danger"
-            className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
+            className="rounded-none w-full h-auto p-2 px-5 justify-start items-center font-normal text-sm"
           >
-            <Trash2 className="ml-2.5" />
+            <Trash2 className="ml-3" />
             Delete this list...
           </FormSubmit>
         </form>

@@ -11,7 +11,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useAction } from "@/hooks/use-action";
 import { List } from "@/lib/generated/prisma/client";
-import { Copy, MoreHorizontal, Trash2, X } from "lucide-react";
+import { CirclePlus, Copy, MoreHorizontal, Trash2, X } from "lucide-react";
 import { ComponentRef, useRef } from "react";
 import { toast } from "sonner";
 
@@ -64,7 +64,7 @@ const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
       </PopoverTrigger>
       <PopoverContent className="px-0 py-3" align="start" side="bottom">
         <div className="text-sm font-medium text-center text-neutral-600 pb-4">
-          List Action
+          List Actions
         </div>
 
         <PopoverClose ref={closeRef} asChild>
@@ -81,7 +81,8 @@ const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
           variant="ghost"
           onClick={onAddCard}
         >
-          Add Card...
+          <CirclePlus className="ml-2.5" />
+          Add a Card
         </Button>
         <form action={onCopy}>
           <input hidden name="id" id="id" value={data.id} />

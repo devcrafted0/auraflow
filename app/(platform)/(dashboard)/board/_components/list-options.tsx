@@ -1,3 +1,4 @@
+import { copyList } from "@/actions/copy-list";
 import { deleteList } from "@/actions/delete-list";
 import { FormSubmit } from "@/components/form/form-submit";
 import { Button } from "@/components/ui/button";
@@ -10,7 +11,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useAction } from "@/hooks/use-action";
 import { List } from "@/lib/generated/prisma/client";
-import { MoreHorizontal, Trash2, X } from "lucide-react";
+import { Copy, MoreHorizontal, Trash2, X } from "lucide-react";
 import { ComponentRef, useRef } from "react";
 import { toast } from "sonner";
 
@@ -36,6 +37,22 @@ const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
     const id = formData.get("id") as string;
     const boardId = formData.get("boardId") as string;
     executeDelete({ id, boardId });
+  };
+
+  const { execute: executeCopy } = useAction(copyList, {
+    onSuccess: (data) => {
+      toast.success(`List "${data.title}" copied.`);
+      closeRef.current?.click();
+    },
+    onError: (data) => {
+      toast.error(data);
+    },
+  });
+
+  const onCopy = (formData: FormData) => {
+    const id = formData.get("id") as string;
+    const boardId = formData.get("boardId") as string;
+    executeCopy({ id, boardId });
   };
 
   return (
@@ -66,14 +83,15 @@ const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
         >
           Add Card...
         </Button>
-        <form>
+        <form action={onCopy}>
           <input hidden name="id" id="id" value={data.id} />
           <input hidden name="boardId" id="boardId" value={data.boardId} />
           <FormSubmit
             variant="ghost"
             className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
           >
-            Copy list...
+            <Copy className="ml-2.5" />
+            Copy Selected List
           </FormSubmit>
         </form>
         <Separator />

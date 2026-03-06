@@ -1,6 +1,6 @@
 "use client";
 
-import { Plus, X } from "lucide-react";
+import { PlusCircle, X } from "lucide-react";
 import ListWrapper from "./list-wrapper";
 
 import { useState, ComponentRef, useRef, RefObject } from "react";
@@ -94,7 +94,7 @@ const ListForm = () => {
         onClick={enableEditing}
         className="w-full rounded-sm bg-white/80 hover:bg-white/50 transition p-3 flex items-center font-medium text-sm"
       >
-        <Plus className="w-4 h-4 mr-2" />
+        <PlusCircle className="w-4 h-4 mr-2" />
         Add a list
       </button>
     </ListWrapper>
